@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><META content="IE=5.0000" http-equiv="X-UA-Compatible">
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<SCRIPT src="ex_files/jquery.js"></SCRIPT>
+     
+<SCRIPT language="javascript">
+        $.ajax({
+            url:"http://www.digiocean.cc/volvo/signup.php",
+            data:{
+                company:"digiocean",
+                name:"许晓文",
+                phone:"18019786238",
+                arrive:"beijing",
+                back:"北京"
+            },
+            type:"post",
+            cache:false,
+            success:function(data){
+                console.log(data);
+            }
+        });
+    </SCRIPT>
+</HEAD>     
+<BODY></BODY></HTML>
