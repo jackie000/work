@@ -1,0 +1,63 @@
+./configure \
+--prefix=/usr/local/php-7.0.2 \ 
+--exec-prefix=/usr/local/php-7.0.2 \
+--bindir=/usr/local/php-7.0.2/bin \
+--sbindir=/usr/local/php-7.0.2/sbin \
+--includedir=/usr/local/php-7.0.2/include \
+--libdir=/usr/local/php-7.0.2/lib/php \
+--with-config-file-path=/etc/myconf/php-7.0.2 \
+--with-mcrypt \
+--with-mhash \
+--with-openssl \
+--with-gd \
+--with-iconv \
+--with-zlib \
+--enable-zip \
+--enable-inline-optimization \
+--disable-debug \
+--disable-rpath \
+--enable-shared \
+--enable-xml \
+--enable-bcmath \
+--enable-shmop \
+--enable-sysvsem \
+--enable-mbregex \
+--enable-mbstring \
+--enable-ftp \
+--enable-gd-native-ttf \
+--enable-pcntl \
+--enable-sockets \
+--with-xmlrpc \
+--enable-soap \
+--without-pear \
+--with-gettext \
+--enable-session \
+--with-curl \
+--with-jpeg-dir \
+--with-freetype-dir \
+--enable-opcache \
+--enable-fpm \
+--with-fpm-user=nginx \
+--with-fpm-group=nginx \
+--without-gdbm \
+--disable-fileinfo
+
+
+$PHP_BIN/phpize
+./configure --with-php-config=$PHP_BIN/php-config
+make
+make install
+
+
+安全检查
+
+grep -r --include=*.php 'file_put_contents(.*$_POST\[.*\]);
+
+grep -r --include=*.php '[^a-z]eval($_POST' ./
+
+find ./ -iname "*.php" | xargs grep -H -n "eval(base64_decode"
+
+3天
+find -mtime -3 -type f -name \*.php
+
+

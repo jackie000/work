@@ -1,0 +1,33 @@
+mysql
+
+
+如果你想允许用户jack从ip为10.10.50.127的主机连接到mysql服务器，并使用654321作为密码
+GRANT ALL PRIVILEGES ON *.* TO ‘dgoroot’@’%’ IDENTIFIED BY 'GMOXDB8KjAX4' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES
+
+
+mysql 5.7.9
+
+/usr/local/mysql-5.7.9/bin/mysqld --initialize-insecure --user=mysql --basedir=/usr/local/mysql-5.7.9 --datadir=/data/mysql-5.7.9
+
+update mysql.user set authentication_string=password('123qwe') where user='svoid' and Host = 'localhost';
+
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql-5.7.9 -DMYSQL_DATADIR=/data/mysql-5.7.9 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=../boost_1_59_0 -DSYSCONFDIR=/etc/myconf/mysql-5.7.9 -DWITH_MYISAM_STORAGE_ENGINE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_MEMORY_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DWITH_FEDERATED_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DENABLED_LOCAL_INFILE=1 -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_EMBEDDED_SERVER=1 -DMYSQL_UNIX_ADDR=/var/run/mysql-5.7.9/mysql.sock -DMYSQL_TCP_PORT=3309
+
+
+65050
+
+
+netstatus -tunlp | grep mysql
+
+
+清除10天前的bin-log日志
+PURGE MASTER LOGS BEFORE DATE_SUB( NOW( ), INTERVAL 10 DAY);
+
+
+mysql -uroot -e 'show processlist\G'|grep 'Info'|grep -v "NULL"|awk -F ":" '{print $2}'|sort|uniq -c|sort -rn;
+
+
+

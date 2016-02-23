@@ -1,0 +1,11 @@
+git archive --format zip --output "./output.zip" master -0
+
+
+使用如下命令
+git archive master | tar -x -C /somewhere/else
+
+
+常用命令
+
+ssh-keygen -t rsa -f ~/.ssh/id_rsa_second -C "second@mail.com"
+# "-t rsa"表示使用密钥的加密类型，还可以为dsa；-C设置注释文字，比如你的邮箱“YourEmail”，不一定要是github注册邮箱

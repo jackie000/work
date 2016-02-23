@@ -1,0 +1,56 @@
+
+ulimit -n
+
+ulimit -n 4096 将每个进程可以打开的文件数目加大到4096，缺省为1024
+其他建议设置成无限制（unlimited）的一些重要设置是：
+
+如何设置普通用户的ulimit值
+1、vim /etc/profile
+增加 ulimit -n 10240
+source /etc/profile 重新启动就不需要运行这个命令了。
+2、修改/etc/security/limits.conf
+增加
+*      hard     nofile     10240   
+\\限制打开文件数10240
+
+
+yum install -y ntp        #安装时间同步服务（组件）
+ntpdate us.pool.ntp.org   #设置同步服务器
+date            
+
+
+
+查找当前目录所有文件，除了/sites/default/files文件夹 和 .DS_Store 文件
+find ./  -path ./sites/default/files -prune -o ! -name '.DS_Store' -print
+
+把找到的文件移动到/opt/shell文件夹
+find .  -type f  |  xargs  -I  '{}' mv {}  /opt/shell
+
+查看占用端口的程序
+netstat -tlnp | grep 80
+
+
+远程复制
+scp /etc/screenrc root@211.103.154.217:/root
+
+
+ sed -n '5,10p' filename 这样你就可以只查看文件的第5行到第10行。
+
+
+
+samba
+
+创建测试服务器开发人员samba账号
+useradd jackie
+passwd jackie
+
+smbpasswd -a jackie
+
+smb://jackie@192.168.199.219/jackie
+
+
+同一服务器不能用不同用户登录
+
+
+
+
