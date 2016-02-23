@@ -86,8 +86,14 @@ class Wave {
      * 平均分贝值
      */
     public function avg_db() {
-        $data_len = $this->get_unpack(0x28, 4, 'L');
-        fseek($this->fp, 44);
+        //$data_len = $this->get_unpack(0x28, 4, 'L');
+        $sBetys = 36;
+        $data = $this->get_unpack(0, $sBetys, 'A4Ri/VSize/A4Wav/A4Head/VHeadSize/vPCM/vChannels/VSampleRate/VByteRate/vBlockAlign/vSampleBits');
+        $data_len = ( $data['Size'] / ( $data['SampleBits'] * $data['Channels'] / 8  ) );
+        //echo $data_len . "\r\n";
+        //var_dump( $data );
+        //exit;
+        fseek($this->fp, 36);
 
         $len = 100;
         $loop = ceil($data_len / $len);
@@ -98,7 +104,7 @@ class Wave {
             $arr = unpack('s*', $bin);
             //print_r($arr);
             $item = $this->dB($arr);
-            echo $item . "\r\n";
+            //echo $item . "\r\n";
             $arr_db[] = $item;
             //print_r($arr);
         }
@@ -263,8 +269,8 @@ class Wave {
 }
 
 //echo '<xmp>';
-$file = empty($_GET['f']) ? 'D:\IIS_WebSite\htdocs\lianjia\2016-02-22\openid_oBpGisxJQcZoDz31k8pK43QGsJN8\20160222161250.wav' : $_GET['f'];
-////$file = "20160221005855.wav";
+$file = empty($_GET['f']) ? 'D:\IIS_WebSite\htdocs\lianjia\2016-02-23\openid_oBpGisxJQcZoDz31k8pK43QGsJN8\20160223121654.wav' : $_GET['f'];
+$file = "20160223135515.wav";
 $wav = new Wave($file);
 //var_dump($wav->is_wav());
 //print_r($wav->get_info());
