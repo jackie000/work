@@ -1,0 +1,22 @@
+Host git.oschina.net
+    IdentityFile ~/.ssh/id_rsa.oschina
+    User ftmer
+Host 192.168.199.219
+    IdentityFile ~/.ssh/id_rsa.local.219
+    User root
+Host 211.103.154.217
+    IdentityFile ~/.ssh/id_rsa.lexus.217
+    User root
+Host 211.103.154.213
+    IdentityFile ~/.ssh/id_rsa.lexus.213
+    User root
+Host g219
+    IdentityFile ~/.ssh/id_rsa_local_219
+    Hostname 192.168.199.219
+    User jackie
+Host github.com
+    IdentityFile ~/.ssh/id_rsa.github
+    User git
+    Hostname github.com
+    PreferredAuthentications publickey
+
