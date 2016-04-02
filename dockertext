@@ -1,0 +1,49 @@
+install fllow
+https://linux.cn/article-4340-1.html
+
+
+tee /etc/yum.repos.d/docker.repo <<-'EOF'
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/centos/$releasever/
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+EOF
+
+
+yum install docker
+
+
+systemctl  start docker.service
+systemctl  enable docker.service
+
+docker pull centos
+
+
+
+
+curl -sSL https://get.docker.com/ | sh
+
+
+
+docker install ssh server
+http://www.winseliu.com/blog/2014/09/30/docker-ssh-on-centos/
+
+
+yum install which openssh-server openssh-clients
+
+ssh-keygen -f /etc/ssh/ssh_host_rsa_key
+ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
+
+vi /etc/pam.d/sshd #pam_loginuid.so为optiona
+/bin/sed -i 's/.*session.*required.*pam_loginuid.so.*/session optional pam_loginuid.so/g' /etc/pam.d/sshd
+
+
+
+yum install passwd 
+passwd root
+
+
+
+
