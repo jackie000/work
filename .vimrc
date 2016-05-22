@@ -20,6 +20,7 @@ set fdm=indent
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 set noerrorbells
 set smarttab
+set nobackup
 filetype on
 " initialize vundle
 if !isdirectory(expand("~/.vim/bundle/vundle/.git"))
@@ -73,7 +74,7 @@ Bundle 'shawncplus/phpcomplete.vim'
 "Bundle 'tomasr/molokai'
 
 " key mapping
-let mapleader=","
+let mapleader=" "
 imap jk <ESC>
 imap Jk <ESC>
 imap JK <ESC>
@@ -81,9 +82,15 @@ imap jK <ESC>
 ""nmap 1 ^
 ""nmap 0 $
 nmap <Leader>tb :TagbarToggle<CR>
+nmap <Leader>wm :WMToggle<CR>
 nmap <Leader>tt :NERDTreeToggle<CR>
 nmap <Leader>nt :tabnew<CR>
-nmap <TAB> :tabn<CR>
+nmap <Leader>j <C-W>j<C-W>
+nmap <Leader>c :close<CR>
+nmap <Leader>q :wqall<CR>
+nmap <Leader>n :vsp<CR>
+nmap <Leader>g :!git 
+""nmap <TAB> :close<CR>
 nmap <C-J> <C-W>j<C-W>_
 nmap <C-K> <C-W>k<C-W>_
 nmap <C-L> <C-W>l<C-W>_
@@ -102,20 +109,20 @@ com! FormatJSON %!python -m json.tool
 let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'jellybeans'
+""let g:airline_theme = 'jellybeans'
 let NERDTreeIgnore = ['\.py[oc]$', '__pycache__', '\.egg-info']
 let g:ctrlp_custom_ignore = 'node_modules\|pyc\|git\|__pycache__'
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+let g:tagbar_ctags_bin='/usr/bin/ctags'
 let g:ctrlp_use_caching = 1
 let g:ctrlp_working_path_mode = 0
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
 let g:syntastic_java_javac_config_file_enabled = 1
 let g:loaded_syntastic_rst_rst2pseudoxml_checker = 1
 let g:jinja_syntax_html = 1
-if filereadable('/usr/local/bin/ctags')
-    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+if filereadable('/usr/bin/ctags')
+    let g:tagbar_ctags_bin = '/usr/bin/ctags'
 endif
-let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+let g:Tlist_Ctags_Cmd='/usr/bin/ctags'
 let Tlist_Use_Right_Window = 0
 let Tlist_Compart_Format = 1
 let Tlist_Exist_OnlyWindow = 1
@@ -143,14 +150,14 @@ endfunction
 colorscheme antares
 " display style
 if exists('+colorcolumn')
-    set colorcolumn=80
+    ""set colorcolumn=80
 endif
 if &term == 'linux' || &term == 'ansi'
     set t_Co=8
 else
     set t_Co=256
 endif
-let base16colorspace=256
+""let base16colorspace=256
 set background=dark
 
 let g:SuperTabRetainCompletionType = 2
@@ -158,7 +165,7 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-N>"
 let g:SuperTabDefaultCompletionType="context"
 
 "DoxygenToolkit
-let g:DoxygenToolkit_authorName="jackie <jackie@digiocean.cc>"
+let g:DoxygenToolkit_authorName="jackie <zhangjie@tvmining.com>"
 let g:DoxygenToolkit_briefTag_funcName="yes"
 let g:doxygen_enhanced_color=1
 
@@ -179,3 +186,4 @@ endif"""""""'"""'"""
 ""au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif""""'"""""'"""'"
 filetype plugin on
 filetype indent on
+set guifont=Courier\ New:h10
