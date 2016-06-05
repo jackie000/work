@@ -19,6 +19,9 @@ ntpdate us.pool.ntp.org   #设置同步服务器
 date            
 
 
+flock
+*/1 * * * * /usr/bin/flock -xn /var/run/test.lock -c '/home/test.sh
+#
 
 查找当前目录所有文件，除了/sites/default/files文件夹 和 .DS_Store 文件
 find ./  -path ./sites/default/files -prune -o ! -name '.DS_Store' -print
