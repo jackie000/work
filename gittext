@@ -9,3 +9,44 @@ git archive master | tar -x -C /somewhere/else
 
 ssh-keygen -t rsa -f ~/.ssh/id_rsa_second -C "second@mail.com"
 # "-t rsa"表示使用密钥的加密类型，还可以为dsa；-C设置注释文字，比如你的邮箱“YourEmail”，不一定要是github注册邮箱
+
+
+
+新建：
+git checkout -b feature-baidumap dev
+
+拉取别人已建分支：
+git fetch origin
+git checkout -b feature-baidumap origin/feature-baidumap
+
+开发中合并他人的提交：
+git fetch origin
+git rebase origin/feature-baidumap
+git add . [如有冲突，解决冲突后提交]
+git rebase --continue  [冲突提交后继续上次rebase]
+
+推送合并后的分支到远程库：
+git push origin feature-baidumap
+
+开发中每天与dev主分支合并，减少冲突：
+git checkout feature-baidumap
+git fetch origin
+git rebase origin/dev
+git add . [如有冲突，解决冲突后提交]
+git rebase --continue  [冲突提交后继续上次rebase]
+
+开发完成删除分支：
+git branch -d feature-baidumap
+
+
+
+先在本地super项目里添加一个远程源：
+git remote add os git@git.oschina.net:a.git
+每次更新前，在本地：
+git fetch os --tags #拉取最新版本
+git tag #查看最新版本
+git tag -a v1.2.x -m 'xxx' #按照最新版本号新增一个版本
+git push os --tags #推到原创代码库
+服务器：
+git fetch origin --tags #拉取最新版本
+git checkout -f v1.2.x #更新到最新版本 ''

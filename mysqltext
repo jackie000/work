@@ -31,3 +31,73 @@ mysql -uroot -e 'show processlist\G'|grep 'Info'|grep -v "NULL"|awk -F ":" '{pri
 
 
 
+delimiter //
+CREATE PROCEDURE load_part_tab()
+    begin
+        declare v int default 0;
+        while v < 800000
+        do
+            insert into message (`message_id`,`created_at`) values (v,adddate('1995-01-01',(rand(v)*36520)mod 3652));
+             set v = v + 1;
+        end while;
+    end
+
+
+可以查看表具有哪几个分区、分区的方法、分区中数据的记录数等信息
+select
+  partition_name part, 
+  partition_expression expr, 
+  partition_description descr, 
+  table_rows 
+from information_schema.partitions  where
+  table_schema = schema() 
+  and table_name='test';  
+
+
+
++------+------------------+-------+------------+
+| part | expr             | descr | table_rows |
++------+------------------+-------+------------+
+| p0   | YEAR(created_at) | NULL  |     127045 |
+| p1   | YEAR(created_at) | NULL  |     126725 |
+| p2   | YEAR(created_at) | NULL  |     126725 |
+| p3   | YEAR(created_at) | NULL  |     126725 |
+| p4   | YEAR(created_at) | NULL  |     126725 |
+| p5   | YEAR(created_at) | NULL  |     126405 |
+| p6   | YEAR(created_at) | NULL  |     127045 |
+| p7   | YEAR(created_at) | NULL  |     126725 |
+| p8   | YEAR(created_at) | NULL  |     126725 |
+| p9   | YEAR(created_at) | NULL  |     126725 |
++------+------------------+-------+------------+
+
+
+4.     explain partitions select语句
+通过此语句来显示扫描哪些分区，及他们是如何使用的.
+
+
+CREATE TABLE IF NOT EXISTS `message` (
+        `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+        `plan` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1:直通车',
+        `user_id` int(10) unsigned NOT NULL,
+        `subscribed_status` tinyint(1) NOT NULL COMMENT '订阅状态, 0:未订阅， 1：订阅',
+        `template_id` int(10) unsigned NOT NULL,
+        `template_value` varchar(200) NOT NULL DEFAULT '',
+        `categories_id` int(10) unsigned NOT NULL,
+        `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1:已读，0:未读',
+        `created_at` datetime NOT NULL,
+        `updated_at` datetime NOT NULL,
+        PRIMARY KEY (`message_id`,`created_at`),
+        KEY `user_id` (`user_id`,`plan`,`subscribed_status`,`categories_id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='站内消息'
+/*!50100 PARTITION BY RANGE (to_days(created_at))
+  (PARTITION p0 VALUES LESS THAN (736329) ENGINE = InnoDB,
+  PARTITION p1 VALUES LESS THAN (736695) ENGINE = InnoDB,
+  PARTITION p2 VALUES LESS THAN (736846) ENGINE = InnoDB,
+  PARTITION p3 VALUES LESS THAN (737060) ENGINE = InnoDB,
+  PARTITION p4 VALUES LESS THAN (737211) ENGINE = InnoDB,
+  PARTITION p5 VALUES LESS THAN (737425) ENGINE = InnoDB,
+  PARTITION p6 VALUES LESS THAN (737576) ENGINE = InnoDB,
+  PARTITION p7 VALUES LESS THAN MAXVALUE ENGINE = InnoDB) */;
+
+
+
