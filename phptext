@@ -1,3 +1,5 @@
+yum -y install libxml2-devel openssl-devel libcurl-devel libjpeg-devel libpng-devel freetype-devel
+
 ./configure \
 --prefix=/usr/local/php-7.0.2 \ 
 --exec-prefix=/usr/local/php-7.0.2 \
