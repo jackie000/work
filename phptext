@@ -40,6 +40,9 @@
 --with-fpm-user=nginx \
 --with-fpm-group=nginx \
 --without-gdbm \
+--with-mysql=mysqlnd \
+--with-mysqli=mysqlnd \
+--with-pdo-mysql=mysqlnd \
 --disable-fileinfo
 
 
