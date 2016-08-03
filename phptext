@@ -46,6 +46,8 @@
 --disable-fileinfo
 
 
+
+
 $PHP_BIN/phpize
 ./configure --with-php-config=$PHP_BIN/php-config
 make
