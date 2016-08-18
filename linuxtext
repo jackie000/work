@@ -37,8 +37,11 @@ netstat -tlnp | grep 80
 scp /etc/screenrc root@211.103.154.217:/root
 
 
- sed -n '5,10p' filename 这样你就可以只查看文件的第5行到第10行。
+ sed -n '5,10p' filename 这样你就可以只查看文件的第5行到第10行.
 
+
+复制目录结构
+find passport-mooc -path passport-mooc/.git -prune -o -type d | sed 's/passport-mooc/mkdir -p vod-mooc/' | s''
 
 
 samba
