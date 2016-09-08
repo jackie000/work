@@ -142,4 +142,5 @@ EOF
 
 systemctl daemon-reload
 systemctl restart nginx.service
+systemctl enable nginx.service
 
