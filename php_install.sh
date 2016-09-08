@@ -75,6 +75,7 @@ echo "include=$php_conf/php-fpm.d/*.conf" >> $php_conf/php-fpm.conf
 cp $php_path/etc/php-fpm.d/www.conf.default $php_conf/php-fpm.d/www.conf
 sed -i '36d' $php_conf/php-fpm.d/www.conf
 sed -i '35a listen = /dev/shm/php-cgi.sock' $php_conf/php-fpm.d/www.conf
+sed -i "47,49s/;//" $php_conf/php-fpm.d/www.conf
 
 #php ini
 cp php.ini-production $php_conf/php.ini

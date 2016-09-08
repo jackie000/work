@@ -111,6 +111,10 @@ http {
 EOF
 
 ip=`ifconfig |  grep 'inet' | grep -v 'grep' | awk '{print $2}' | paste -s -d " "`
+mkdir -p /data/www
+chown -R $nginx_user:$nginx_user /data/www
+echo $ip > /data/www/ip.html
+
 cat > $nginx_conf/vhost/www.conf <<EOF
 server {
 	listen       80;
