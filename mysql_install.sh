@@ -152,6 +152,14 @@ source /etc/profile
 
 systemctl start mysql3309.service
 systemctl enable mysql3309.service
+
+$mysql_path/bin/mysqladmin -u root password R3JoC9MN4Ef0
+$mysql_path/bin/mysql -uroot -pR3JoC9MN4Ef0 <<EOF
+GRANT ALL PRIVILEGES ON *.* TO xjroot@'%' IDENTIFIED BY 'DgyE1ZHdMT5x' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+select * from mysql.user where user='xjroot'\G;
+EOF
+
 else
 echo "installed.\n"
 

@@ -107,6 +107,9 @@ systemctl daemon-reload
 #extension
 sed -i "725a extension_dir='$php_path/lib/php/extensions/no-debug-non-zts-20151012/'" $php_conf/php.ini
 
+echo "export PATH=$PATH:$php_path/bin/" >>/etc/profile
+source /etc/profile
+
 fi
 #yaf
 cd $soft_dir
