@@ -5,6 +5,7 @@ redis_conf=/etc/myconf/$redis_version
 redis_path=/opt/application/$redis_version
 
 soft_dir=/data/soft/redis
+mkdir -p $soft_dir
 cd $soft_dir
 
 
